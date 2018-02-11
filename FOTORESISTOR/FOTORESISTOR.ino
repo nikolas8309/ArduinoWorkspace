@@ -11,6 +11,9 @@ void setup()
 {
   pinMode(ledPin, OUTPUT); //sets the led pin to output
   Serial.begin(9600);
+  nikos();
+  giannis();
+  
 }
  /*
  * loop() - this function will start after setup 
