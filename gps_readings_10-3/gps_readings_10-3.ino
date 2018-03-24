@@ -24,7 +24,6 @@ SoftwareSerial nss(2, 3);
 LSM303C myIMU;
 
 int setWaypointPin = 5;
-int buttonState = 0;
 
 void setup()
 {

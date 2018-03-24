@@ -1,17 +1,25 @@
 
-
+/**
+ * epistrefei true sthn metavash apo low se high
+ * epistrefei false sthn metavash apo high se low
+ */
 bool checkSetWaypointButton ()
 {
-
-	buttonState = digitalRead(setWaypointPin);
-	if (buttonState == HIGH)
-    return true;
-  else
-    return false;
+  bool buttonState;
+  static bool previousState = false;
+  
+  buttonState = digitalRead(setWaypointPin);
 
   
-
-
+  if(buttonState==HIGH && previousState==LOW){//patima
+    previousState=buttonState;
+    return true;
+  }
+  
+  else{ //se kathe alli periptosi
+    previousState=buttonState;
+    return false;
+  }
 }
 
 void printDistanceDifference(float flat,float flon,float  flat2,float  flon2){
