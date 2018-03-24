@@ -1,3 +1,8 @@
+float heading;
+float flon1;
+float x2lon;
+float x2lat;
+float flat1;
 
 //ypologizei kai typonei to heading apo to ena simeio sto allo
 void headingf()
@@ -18,12 +23,9 @@ void headingf()
 	int head =heading; //make it a integer now
 
 	if(head<0){
-
 		heading+=360;   //if the heading is negative then add 360 to make it positive
-
 	}
 
 	Serial.println("heading:");
-
 	Serial.println(heading);   // print the heading.
 }

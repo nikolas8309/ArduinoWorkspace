@@ -42,12 +42,7 @@ void gpsdump(TinyGPS &gps)
   gps.stats(&chars, &sentences, &failed);
   Serial.print("Stats: characters: "); Serial.print(chars); Serial.print(" sentences: "); Serial.print(sentences); Serial.print(" failed checksum: "); Serial.println(failed);
 
-  float dist=distance(flat,flon,flat2,flon2);
-  Serial.println("distance");
-  Serial.print(dist,4);    //print the distance in meters
-  Serial.println(" m");
+
   
-  headingf();
-  compassread();
 }
 

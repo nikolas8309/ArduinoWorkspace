@@ -6,17 +6,6 @@
 #include "SparkFunLSM303C.h"
 #include "LSM303CTypes.h"
 
-byte headingData[2];
-int i, headingValue;
-float flat2, flon2;
-float flat, flon;
-float flat1;
-float flon1;
-float heading;
-float x2lat;
-float x2lon ;
-int headingcompass;
-
 void printFloat(double number, int digits=2);
 
 TinyGPS gps;
@@ -43,6 +32,9 @@ void setup()
 
 void loop()
 {
+  float flat2, flon2;
+  float flat, flon;
+  
 	if(checkSetWaypointButton()){//to koumpi exei patithei
 		//diavase tis sintetagmenes apo to gps kai valtes
 		//sthn RAM san flat2 kai flon2
@@ -67,6 +59,16 @@ void loop()
 		Serial.println("Acquired Data");
 		Serial.println("-------------");
 		gpsdump(gps); //dumps data in STDOUT
+
+    float dist=distance(flat,flon,flat2,flon2);
+    Serial.println("distance");
+    Serial.print(dist,4);    //print the distance in meters
+    Serial.println(" m");
+  
+    headingf();
+    
+    compassread();
+
 		Serial.println("-------------");
 		Serial.println();
 	}
