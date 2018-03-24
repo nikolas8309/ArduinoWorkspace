@@ -32,14 +32,22 @@ void setup()
 
 void loop()
 {
-  float flat2, flon2;
+  static float flat2;
+  static float flon2;
   float flat, flon;
   
 	if(checkSetWaypointButton()){//to koumpi exei patithei
 		//diavase tis sintetagmenes apo to gps kai valtes
 		//sthn RAM san flat2 kai flon2
+    Serial.println("Setting waypoint");
 		gps.f_get_position(&flat2, &flon2 );
 	}
+
+   Serial.print("flat2=");
+   Serial.print(flat2);
+   Serial.print(" flon2=");
+   Serial.println(flon2);
+ 
 	gps.f_get_position(&flat, &flon);
 	//Serial.println("MARK1");
 	printDistanceDifference(flat,flon,flat2,flon2);
