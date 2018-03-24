@@ -1,7 +1,10 @@
-char ch;
 
+/**
+* 	returns true if new data is available, otherwise false
+*/
 bool feedgps()
 {
+	char ch;
 	while (nss.available())
 	{
 		ch=nss.read();

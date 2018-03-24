@@ -12,13 +12,9 @@ void headingf()
 //  Serial.println(x2lat);
   
 	flon1 = radians(flon1);  //also must be done in radians
-
 	x2lon = radians(x2lon);  //radians duh.
-
 	heading = atan2(sin(x2lon-flon1)*cos(x2lat),cos(flat1)*sin(x2lat)-sin(flat1)*cos(x2lat)*cos(x2lon-flon1)),2*3.1415926535;
-
 	heading = heading*180/3.1415926535;  // convert from radians to degrees
-
 	int head =heading; //make it a integer now
 
 	if(head<0){

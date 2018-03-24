@@ -6,8 +6,6 @@
 #include "SparkFunLSM303C.h"
 #include "LSM303CTypes.h"
 
-//int HMC6352Address = 0x1E;
-//int slaveAddress; //TODO check if it is used anywhere
 byte headingData[2];
 int i, headingValue;
 float flat2, flon2;
@@ -23,49 +21,50 @@ TinyGPS gps;
 SoftwareSerial nss(2, 3);
 LSM303C myIMU;
 
-int setWaypointPin = 5;
+const int setWaypointButtonPin = 5;
 
 void setup()
 {
-	pinMode(setWaypointPin , INPUT);
+	pinMode(setWaypointButtonPin , INPUT);
 
 	Serial.begin(115200);
 	nss.begin(9600);
 
-  if (myIMU.begin() != IMU_SUCCESS)
-  {
-    Serial.println("Failed setup magneto");
-    while(1);
-  }
+	if (myIMU.begin() != IMU_SUCCESS)
+	{
+		Serial.println("Failed setup magneto");
+		while(1);
+	}
 
 	Wire.begin();
 }
+
 void loop()
 {
 	if(checkSetWaypointButton()){//to koumpi exei patithei
-    //diavase tis sintetagmenes apo to gps kai valtes
-    //sthn RAM san flat2 kai flon2
-    gps.f_get_position(&flat2, &flon2 );
+		//diavase tis sintetagmenes apo to gps kai valtes
+		//sthn RAM san flat2 kai flon2
+		gps.f_get_position(&flat2, &flon2 );
 	}
-  gps.f_get_position(&flat, &flon);
-  //Serial.println("MARK1");
-  printDistanceDifference(flat,flon,flat2,flon2);
-  //Serial.println("MARK2");
- 
+	gps.f_get_position(&flat, &flon);
+	//Serial.println("MARK1");
+	printDistanceDifference(flat,flon,flat2,flon2);
+	//Serial.println("MARK2");
+
 	bool newdata = false;
 	unsigned long start = millis();
 	// Every fourth of a second we print an update
 
 	while (millis() - start < 250)
 	{
-		if (feedgps())
+		if (feedgps())//returns true if new data is available
 		newdata = true;
 	}
 	if (newdata)
 	{
 		Serial.println("Acquired Data");
 		Serial.println("-------------");
-		gpsdump(gps);
+		gpsdump(gps); //dumps data in STDOUT
 		Serial.println("-------------");
 		Serial.println();
 	}
@@ -76,38 +75,40 @@ void loop()
 
 void printFloat(double number, int digits=2)
 {
-	// Handle negative numbers
-	if (number < 0.0)
-	{
-		Serial.print('-');
-		number = -number;
-	}
+  // Handle negative numbers
+  if (number < 0.0)
+  {
+    Serial.print('-');
+    number = -number;
+  }
 
-	// Round correctly so that print(1.999, 2) prints as "2.00"
-	double rounding = 0.5;
-	for (uint8_t i=0; i<digits; ++i)
-	rounding /= 10.0;
+  // Round correctly so that print(1.999, 2) prints as "2.00"
+  double rounding = 0.5;
+  for (uint8_t i=0; i<digits; ++i)
+  rounding /= 10.0;
 
-	number += rounding;
+  number += rounding;
 
-	// Extract the integer part of the number and print it
-	unsigned long int_part = (unsigned long)number;
-	double remainder = number - (double)int_part;
-	Serial.print(int_part);
+  // Extract the integer part of the number and print it
+  unsigned long int_part = (unsigned long)number;
+  double remainder = number - (double)int_part;
+  Serial.print(int_part);
 
-	// Print the decimal point, but only if there are digits beyond
-	if (digits > 0)
-	Serial.print("."); 
+  // Print the decimal point, but only if there are digits beyond
+  if (digits > 0)
+  Serial.print("."); 
 
-	// Extract digits from the remainder one at a time
-	while (digits-- > 0)
-	{
-		remainder *= 10.0;
-		int toPrint = int(remainder);
-		Serial.print(toPrint);
-		remainder -= toPrint; 
-	} 
+  // Extract digits from the remainder one at a time
+  while (digits-- > 0)
+  {
+    remainder *= 10.0;
+    int toPrint = int(remainder);
+    Serial.print(toPrint);
+    remainder -= toPrint; 
+  } 
 }
+
+
 
 //typwnei ta dedomena toy gps
 void gpsdump(TinyGPS &gps)
@@ -124,7 +125,7 @@ void gpsdump(TinyGPS &gps)
 	feedgps(); // If we don't feed the gps during this long routine, we may drop characters and get checksum errors
 
 	gps.f_get_position(&flat, &flon, &age);
-	Serial.print("Lat/Long(float): "); printFloat(flat, 5); Serial.print(", "); printFloat(flon, 5);
+	Serial.print("Lat/Long(float): "); printFloat((double)flat, 5); Serial.print(", "); printFloat((double)flon, 5);
 	Serial.print(" Fix age: "); Serial.print(age); Serial.println("ms.");
 
 	feedgps();
@@ -132,7 +133,13 @@ void gpsdump(TinyGPS &gps)
 	gps.stats(&chars, &sentences, &failed);
 	Serial.print("Stats: characters: "); Serial.print(chars); Serial.print(" sentences: "); Serial.print(sentences); Serial.print(" failed checksum: "); Serial.println(failed);
 
-	distance();
+	float dist=distance(flat,flon,flat2,flon2);
+	Serial.println("distance");
+	Serial.print(dist,4);    //print the distance in meters
+	Serial.println(" m");
+	
+	headingf();
+	compassread();
 }
 
 
