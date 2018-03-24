@@ -24,7 +24,7 @@ SoftwareSerial nss(2, 3);
 LSM303C myIMU;
 
 int setWaypointPin = 5;
-int buttonstate = 0;
+int buttonState = 0;
 
 void setup()
 {
@@ -43,7 +43,16 @@ void setup()
 }
 void loop()
 {
-	gpsbutton ();
+	if(checkSetWaypointButton()){//to koumpi exei patithei
+    //diavase tis sintetagmenes apo to gps kai valtes
+    //sthn RAM san flat2 kai flon2
+    gps.f_get_position(&flat2, &flon2 );
+	}
+  gps.f_get_position(&flat, &flon);
+  //Serial.println("MARK1");
+  printDistanceDifference(flat,flon,flat2,flon2);
+  //Serial.println("MARK2");
+ 
 	bool newdata = false;
 	unsigned long start = millis();
 	// Every fourth of a second we print an update
