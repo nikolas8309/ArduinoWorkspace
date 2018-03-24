@@ -23,18 +23,12 @@ TinyGPS gps;
 SoftwareSerial nss(2, 3);
 LSM303C myIMU;
 
-//void gpsdump(TinyGPS &gps);
-//bool feedgps();
-//void printFloat(double f, int digits = 2);
-//void gpsbutton (); 
-//void headingf();
-//void compassread();
-int staticlocation = 5;
+int setWaypointPin = 5;
 int buttonstate = 0;
 
 void setup()
 {
-	pinMode(staticlocation , INPUT);
+	pinMode(setWaypointPin , INPUT);
 
 	Serial.begin(115200);
 	nss.begin(9600);
@@ -107,6 +101,7 @@ void printFloat(double number, int digits=2)
 	} 
 }
 
+//typwnei ta dedomena toy gps
 void gpsdump(TinyGPS &gps)
 {
 	long lat, lon;

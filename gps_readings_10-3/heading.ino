@@ -1,5 +1,5 @@
 
-
+//ypologizei kai typonei to heading apo to ena simeio sto allo
 void headingf()
 {
 //  Serial.print("flon1=");

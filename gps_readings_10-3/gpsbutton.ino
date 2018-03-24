@@ -3,7 +3,7 @@
 void gpsbutton ()
 {
 
-	buttonstate = digitalRead(staticlocation);
+	buttonstate = digitalRead(setWaypointPin);
 	if (buttonstate == HIGH)
 	gps.f_get_position(&flat2, &flon2 );
 	//diavase tis sintetagmenes apo to gps kai valtes
@@ -19,6 +19,9 @@ void gpsbutton ()
 	smartdelay(1000);
 }
 
+/**
+ * Delay while keeping track of gps activity
+ */
 static void smartdelay(unsigned long ms)
 {
 	unsigned long start = millis();

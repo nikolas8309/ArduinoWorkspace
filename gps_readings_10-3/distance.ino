@@ -1,5 +1,5 @@
 
-
+//ypologizei kai typonei tin apostash metaksi dyo simeion
 void distance(){      //this function will do all the calculations
 	flat1=flat;     // flat1 = our current latitude. flat is from the gps data. 
 	flon1=flon;  // flon1 = our current longitude. flon is from the fps data.
