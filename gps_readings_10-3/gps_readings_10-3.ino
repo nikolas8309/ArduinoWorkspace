@@ -42,15 +42,10 @@ void loop()
     Serial.println("Setting waypoint");
 		gps.f_get_position(&flat2, &flon2 );
 	}
-
-   Serial.print("flat2=");
-   Serial.print(flat2);
-   Serial.print(" flon2=");
-   Serial.println(flon2);
  
 	gps.f_get_position(&flat, &flon);
 	//Serial.println("MARK1");
-	printDistanceDifference(flat,flon,flat2,flon2);
+	//printDistanceDifference(flat,flon,flat2,flon2);
 	//Serial.println("MARK2");
 
 	bool newdata = false;
