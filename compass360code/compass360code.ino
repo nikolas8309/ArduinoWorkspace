@@ -24,10 +24,10 @@ void setup(void)
  
 void loop(void) 
 {
-  float x_axis = (myIMU.readMagX()*10000);
-  float y_axis = (myIMU.readMagY()*10000);
-  //Serial.println (y_axis);
-  //Serial.println (myIMU.readMagY());
+  float x_axis = (myIMU.readMagX()/10);
+  float y_axis = (myIMU.readMagY()/10);
+  Serial.println (y_axis);
+  Serial.println (myIMU.readMagY());
   /* Get a new sensor event */ 
   //sensors_event_t event; 
   //mag.getEvent(&event);
