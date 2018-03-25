@@ -69,7 +69,9 @@ void loop()
   
     float heading=headingf(point1,point2);
     Serial.print("heading: ");
-    Serial.println(heading);   // print the heading.
+    Serial.print(heading);   // print the heading.
+    Serial.println(" degrees");
+  
       
     compassread();
 

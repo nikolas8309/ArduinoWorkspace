@@ -1,7 +1,7 @@
 
 
 
-//ypologizei kai typonei to heading apo to ena simeio sto allo
+//epistrefei se moires to heading apo to ena simeio sto allo
 float headingf(Point point1, Point point2)
 {
   float heading;
