@@ -1,6 +1,12 @@
+#include "utilities.h"
 
 // ypologizei kai epistrefei tin apostash metaksi dyo simeion (se metra)
-float distance(float flat1, float flon1, float  flat2, float  flon2){      
+float distance(Point point1, Point point2){      
+  
+  float flat1=point1.latitude;
+  float flon1=point1.longitude;
+  float flat2=point2.latitude;
+  float flon2=point2.longitude;
 
 	float dist_calc=0;
 	float dist_calc2=0;

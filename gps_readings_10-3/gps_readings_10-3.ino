@@ -6,6 +6,8 @@
 #include "SparkFunLSM303C.h"
 #include "LSM303CTypes.h"
 
+#include "utilities.h"
+
 void printFloat(double number, int digits=2);
 
 TinyGPS gps;
@@ -21,6 +23,7 @@ void setup()
 	Serial.begin(115200);
 	nss.begin(9600);
 
+  
 	if (myIMU.begin() != IMU_SUCCESS)
 	{
 		Serial.println("Failed setup magneto");
@@ -32,18 +35,21 @@ void setup()
 
 void loop()
 {
-  static float flat2;
-  static float flon2;
-  float flat, flon;
+//  static float flat2;
+//  static float flon2;
+//  float flat, flon;
+  static Point point2;
+  Point point1;
+
   
 	if(checkSetWaypointButton()){//to koumpi exei patithei
 		//diavase tis sintetagmenes apo to gps kai valtes
 		//sthn RAM san flat2 kai flon2
     Serial.println("Setting waypoint");
-		gps.f_get_position(&flat2, &flon2 );
+		gps.f_get_position(&point2.latitude, &point2.longitude);
 	}
  
-	gps.f_get_position(&flat, &flon);
+	gps.f_get_position(&point1.latitude, &point1.longitude);
 	//Serial.println("MARK1");
 	//printDistanceDifference(flat,flon,flat2,flon2);
 	//Serial.println("MARK2");
@@ -63,7 +69,9 @@ void loop()
 		Serial.println("-------------");
 		gpsdump(gps); //dumps data in STDOUT
 
-    float dist=distance(flat,flon,flat2,flon2);
+
+
+    float dist=distance(point1,point2);
     Serial.println("distance");
     Serial.print(dist,4);    //print the distance in meters
     Serial.println(" m");
