@@ -35,24 +35,17 @@ void setup()
 
 void loop()
 {
-//  static float flat2;
-//  static float flon2;
-//  float flat, flon;
   static Point point2;
   Point point1;
 
   
 	if(checkSetWaypointButton()){//to koumpi exei patithei
-		//diavase tis sintetagmenes apo to gps kai valtes
-		//sthn RAM san flat2 kai flon2
+		//diavase tis sintetagmenes apo to gps kai valtes sto Point2
     Serial.println("Setting waypoint");
 		gps.f_get_position(&point2.latitude, &point2.longitude);
 	}
  
 	gps.f_get_position(&point1.latitude, &point1.longitude);
-	//Serial.println("MARK1");
-	//printDistanceDifference(flat,flon,flat2,flon2);
-	//Serial.println("MARK2");
 
 	bool newdata = false;
 	unsigned long start = millis();
@@ -69,8 +62,6 @@ void loop()
 		Serial.println("-------------");
 		gpsdump(gps); //dumps data in STDOUT
 
-
-
     float dist=distance(point1,point2);
     Serial.println("distance");
     Serial.print(dist,4);    //print the distance in meters
@@ -83,18 +74,6 @@ void loop()
 		Serial.println("-------------");
 		Serial.println();
 	}
-
-
-
 }
-
-
-
-
-
-
-
-
-
 
 
