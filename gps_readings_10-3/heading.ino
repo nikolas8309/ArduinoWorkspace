@@ -1,20 +1,15 @@
-float heading;
-float flon1;
-float x2lon;
-float x2lat;
-float flat1;
+
+
 
 //ypologizei kai typonei to heading apo to ena simeio sto allo
-void headingf()
+float headingf(Point point1, Point point2)
 {
-//  Serial.print("flon1=");
-//  Serial.print(flon1);
-//  Serial.print("flat1=");
-//  Serial.print(flat1);
-//  Serial.print(" x2lon=");
-//  Serial.print(x2lon);
-//  Serial.print("x2lat=");
-//  Serial.println(x2lat);
+  float heading;
+  
+  float flat1=point1.latitude;
+  float flon1=point1.longitude;
+  float x2lat=point2.latitude;
+  float x2lon=point2.longitude;
   
 	flon1 = radians(flon1);  //also must be done in radians
 	x2lon = radians(x2lon);  //radians duh.
@@ -26,6 +21,5 @@ void headingf()
 		heading+=360;   //if the heading is negative then add 360 to make it positive
 	}
 
-	Serial.println("heading:");
-	Serial.println(heading);   // print the heading.
+  return heading;
 }

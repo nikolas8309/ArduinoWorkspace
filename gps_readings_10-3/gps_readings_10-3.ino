@@ -63,12 +63,14 @@ void loop()
 		gpsdump(gps); //dumps data in STDOUT
 
     float dist=distance(point1,point2);
-    Serial.println("distance");
+    Serial.print("distance: ");
     Serial.print(dist,4);    //print the distance in meters
     Serial.println(" m");
   
-    headingf();
-    
+    float heading=headingf(point1,point2);
+    Serial.print("heading: ");
+    Serial.println(heading);   // print the heading.
+      
     compassread();
 
 		Serial.println("-------------");
