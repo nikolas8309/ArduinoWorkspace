@@ -315,6 +315,10 @@ float LSM303C::readMag(AXIS_t dir)
     response = MAG_GetMagRaw(magData);
     debug_println("Fresh raw data");
   }
+  
+  debug_print("sensitivity_mag=");
+  debug_println(SENSITIVITY_MAG);
+  
   //convert from LSB to Gauss
   switch (dir)
   {
@@ -353,7 +357,11 @@ status_t LSM303C::MAG_GetMagRaw(AxesRaw_t& buff)
     return IMU_HW_ERROR;
   }
 
+  	
   buff.xAxis = (int16_t)( (valueH << 8) | valueL );
+  
+  debug_print("mag-X-raw=");
+  debug_printlns(buff.xAxis, HEX);
   
   if( MAG_ReadReg(MAG_OUTY_L, valueL) )
   {
@@ -367,6 +375,9 @@ status_t LSM303C::MAG_GetMagRaw(AxesRaw_t& buff)
 
   buff.yAxis = (int16_t)( (valueH << 8) | valueL );
   
+  debug_print("mag-Y-raw=");
+  debug_printlns(buff.yAxis, HEX);
+  
   if( MAG_ReadReg(MAG_OUTZ_L, valueL) )
   {
     return IMU_HW_ERROR;
@@ -378,7 +389,10 @@ status_t LSM303C::MAG_GetMagRaw(AxesRaw_t& buff)
   }
 
   buff.zAxis = (int16_t)( (valueH << 8) | valueL );
-
+  
+  debug_print("mag-Z-raw=");
+  debug_printlns(buff.zAxis, HEX);
+  
   return IMU_SUCCESS;
 }
 
