@@ -23,3 +23,4 @@ float headingf(Point point1, Point point2)
 
   return heading;
 }
+
