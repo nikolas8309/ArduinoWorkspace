@@ -22,6 +22,10 @@ void setup()
 
 	Serial.begin(115200);
 	nss.begin(9600);
+  
+  //for receiver read 
+   pinMode(RC_CH4_INPUT, INPUT);
+    enableInterrupt(RC_CH4_INPUT, calc_input, CHANGE);
 
   
 	if (myIMU.begin() != IMU_SUCCESS)
@@ -35,6 +39,11 @@ void setup()
 
 void loop()
 {
+  if (!hasSignal()) {
+    Serial.print ("xathike to sima");
+  }
+    else {Serial.print ("vrethike to sima");}
+       
   static Point point2;
   Point point1;
 
