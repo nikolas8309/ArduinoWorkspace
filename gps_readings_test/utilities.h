@@ -12,7 +12,7 @@ struct Point {
 };
 
 
-
+int counter;
 
 
 
