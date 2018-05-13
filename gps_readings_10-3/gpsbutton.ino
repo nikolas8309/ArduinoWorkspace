@@ -38,5 +38,6 @@ static void smartdelay(unsigned long ms)
 }
 
 
-
-
+//----------------------------------------------------------
+  //pernei tis trexouses suntetagmenes
+  

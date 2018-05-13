@@ -40,3 +40,8 @@
 //  return isInLimit;
 //}
 
+// returns TRUE if it has signal, otherwise FALSE.
+bool hasSignal(){
+  return !digitalRead(NANO_OUT_PIN);
+  
+}

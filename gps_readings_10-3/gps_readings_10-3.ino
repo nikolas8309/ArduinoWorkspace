@@ -16,10 +16,18 @@ MechaQMC5883 qmc;
 
 const int setWaypointButtonPin = 5;
 
+Servo myservo;
+Servo esc;
 void setup()
 {
 	pinMode(setWaypointButtonPin , INPUT);
+  pinMode (NANO_OUT_PIN , INPUT);
+  pinMode (TO_BUFFER_PIN ,OUTPUT);
 
+//servo staff
+  myservo.attach (ARDUINO_TO_DIRECTION_SERVO_PIN);
+  esc.attach (ARDUINO_TO_ESC_PIN);
+  
 	Serial.begin(115200);
 	nss.begin(9600);
   
@@ -30,27 +38,50 @@ void setup()
     qmc.init();
 
 	Wire.begin();
+
+ //make sure receiver has the control
+ //setControlHolder(RECEIVER);
 }
 
 void loop()
 {
-//  if (!hasSignal()) {
-//    Serial.println ("xathike to sima");
-//  }
-//    else {Serial.println ("vrethike to sima");
-//    }
+  static Point wayPoint;
+  Point currentPoint;
+  
+  if (hasSignal()) {
+    setControlHolder (RECEIVER);
+}
+  else {
+    setControlHolder (ARDUINO);
+    setThrottle(100);
+
+    //update current point and waypoint
+    
+
+    //get waypoint heading
+    float heading=headingf(currentPoint,wayPoint);
+    
+    //get current heading
+    compassread();
+    //check if they are equal
+
+    //set direction
+//    setDirection();
+    
+    }
+//-0------------------------------
+
        
-  static Point point2;
-  Point point1;
+
 
   
 	if(checkSetWaypointButton()){//to koumpi exei patithei
 		//diavase tis sintetagmenes apo to gps kai valtes sto Point2
     Serial.println("Setting waypoint");
-		gps.f_get_position(&point2.latitude, &point2.longitude);
+		gps.f_get_position(&wayPoint.latitude, &wayPoint.longitude);
 	}
  
-	gps.f_get_position(&point1.latitude, &point1.longitude);
+	gps.f_get_position(&currentPoint.latitude, &currentPoint.longitude);
 
 	bool newdata = false;
 	unsigned long start = millis();
@@ -67,18 +98,18 @@ void loop()
 		Serial.println("-------------");
 		gpsdump(gps); //dumps data in STDOUT
 
-    float dist=distance(point1,point2);
+    float dist=distance(currentPoint,wayPoint);
     Serial.print("distance: ");
     Serial.print(dist,4);    //print the distance in meters
     Serial.println(" m");
   
-    float heading=headingf(point1,point2);
+    float heading=headingf(currentPoint,wayPoint);
     Serial.print("heading: ");
     Serial.print(heading);   // print the heading.
     Serial.println(" degrees");
   
       
-    compassread();
+    
 
 		Serial.println("-------------");
 		Serial.println();

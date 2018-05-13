@@ -19,7 +19,7 @@ bool feedgps()
 }
 
 
-//typwnei ta dedomena toy gps
+//typwnei ta trexonta dedomena toy gps
 void gpsdump(TinyGPS &gps)
 {
   long lat, lon;
