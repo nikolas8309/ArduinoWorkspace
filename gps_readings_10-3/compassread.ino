@@ -3,21 +3,20 @@
  */
 void compassread()
 {
-  Serial.print("\nMagnetometer:\n");
-  float X=myIMU.readMagX();
-  Serial.print(" X = ");
-  Serial.println(X, 4);
-
-  float Y=myIMU.readMagY();
-  Serial.print(" Y = ");
-  Serial.println(Y, 4);
-
-  float Z=myIMU.readMagZ();
-  Serial.print(" Z = ");
-  Serial.println(Z, 4);
-
-  float angle = atan2(Y, X);
-  Serial.println(angle, 4);
-
+  int x, y, z;
+  int azimuth;
+  //float azimuth; //is supporting float too
+  qmc.read(&x, &y, &z,&azimuth);
+  //azimuth = qmc.azimuth(&y,&x);//you can get custom azimuth
+  Serial.print("x: ");
+  Serial.print(x);
+  Serial.print(" y: ");
+  Serial.print(y);
+  Serial.print(" z: ");
+  Serial.print(z);
+  Serial.print(" a: ");
+  Serial.print(azimuth);
+  Serial.println();
+  delay(100);
 }
 

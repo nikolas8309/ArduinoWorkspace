@@ -15,12 +15,12 @@ float headingf(Point point1, Point point2)
 	x2lon = radians(x2lon);  //radians duh.
 	heading = atan2(sin(x2lon-flon1)*cos(x2lat),cos(flat1)*sin(x2lat)-sin(flat1)*cos(x2lat)*cos(x2lon-flon1)),2*3.1415926535;
 	heading = heading*180/3.1415926535;  // convert from radians to degrees
-	int head =heading; //make it a integer now
 
-	if(head<0){
+	if(heading<0.0){
 		heading+=360;   //if the heading is negative then add 360 to make it positive
 	}
-
+  
+ 
   return heading;
 }
 

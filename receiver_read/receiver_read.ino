@@ -8,9 +8,10 @@
 uint16_t rc_values;
 uint32_t rc_start;
 volatile uint16_t rc_shared;
-int ledpin = 13;
+int ledpin = 12;
 int minLimit = 900;
 int maxLimit = 1450;
+int buffer_enable_pin = 13;
 
 void rc_read_values() {
     noInterrupts();
@@ -35,6 +36,7 @@ void setup() {
     pinMode(RC_CH4_INPUT, INPUT);
     enableInterrupt(RC_CH4_INPUT, calc_input, CHANGE);
     pinMode(ledpin,OUTPUT );
+    pinMode (buffer_enable_pin,OUTPUT );
 }
 
 void loop() {
@@ -53,8 +55,10 @@ void loop() {
     }
     if(isInLimit){
         digitalWrite(ledpin, HIGH);
+        digitalWrite (buffer_enable_pin, LOW);
     }else{
         digitalWrite(ledpin,LOW);
+        digitalWrite (buffer_enable_pin, HIGH);
     }
     delay (500);
 
