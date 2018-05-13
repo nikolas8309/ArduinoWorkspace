@@ -40,4 +40,16 @@ static void smartdelay(unsigned long ms)
 
 //----------------------------------------------------------
   //pernei tis trexouses suntetagmenes
+Point getGpsCurrentPosition (){
+  Point currentPoint;  
   
+  gps.f_get_position(&currentPoint.latitude, &currentPoint.longitude);
+
+  return currentPoint;
+}
+
+//---------------------------------------------------------------
+
+
+
+

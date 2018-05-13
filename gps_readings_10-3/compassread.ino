@@ -20,3 +20,16 @@ void compassread()
   delay(100);
 }
 
+
+/**
+ * returns current heading in degrees from compass
+ */
+int getAzimuth()
+{
+  int x, y, z;
+  int azimuth;
+  //float azimuth; //is supporting float too
+  qmc.read(&x, &y, &z,&azimuth);
+  return azimuth;
+}
+

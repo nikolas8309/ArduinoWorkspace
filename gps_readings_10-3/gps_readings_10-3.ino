@@ -55,14 +55,22 @@ void loop()
     setControlHolder (ARDUINO);
     setThrottle(100);
 
-    //update current point and waypoint
-    
+    //get current point 
+    currentPoint = getGpsCurrentPosition ();
 
+    //  update waypoint if button was pressed
+    if(checkSetWaypointButton()){//to koumpi exei patithei
+      //diavase tis sintetagmenes apo to gps kai valtes sto waypoint
+      gps.f_get_position(&wayPoint.latitude, &wayPoint.longitude);
+    }
+        
     //get waypoint heading
     float heading=headingf(currentPoint,wayPoint);
     
     //get current heading
-    compassread();
+    int currentHeading = getAzimuth();
+    Serial.print(currentHeading);
+
     //check if they are equal
 
     //set direction
@@ -75,13 +83,9 @@ void loop()
 
 
   
-	if(checkSetWaypointButton()){//to koumpi exei patithei
-		//diavase tis sintetagmenes apo to gps kai valtes sto Point2
-    Serial.println("Setting waypoint");
-		gps.f_get_position(&wayPoint.latitude, &wayPoint.longitude);
-	}
+
  
-	gps.f_get_position(&currentPoint.latitude, &currentPoint.longitude);
+
 
 	bool newdata = false;
 	unsigned long start = millis();
