@@ -1,17 +1,17 @@
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include <TinyGPS.h>
 #include <Wire.h>
 
-#include "SparkFunIMU.h"
-#include "SparkFunLSM303C.h"
-#include "LSM303CTypes.h"
+//#include "SparkFunIMU.h"
+//#include "SparkFunLSM303C.h"
+//#include "LSM303CTypes.h"
 
 #include "utilities.h"
 
 void printFloat(double number, int digits=2);
 
 TinyGPS gps;
-SoftwareSerial nss(6,7);//2,3
+//SoftwareSerial nss(6,7);//2,3
 MechaQMC5883 qmc;
 
 const int setWaypointButtonPin = 5;
@@ -29,7 +29,8 @@ void setup()
   esc.attach (ARDUINO_TO_ESC_PIN);
   
 	Serial.begin(115200);
-	nss.begin(9600);
+	//nss.begin(9600);
+  GPS_SERIAL_PORT.begin(9600);
   
   //for receiver read 
 //   pinMode(RC_CH4_INPUT, INPUT);

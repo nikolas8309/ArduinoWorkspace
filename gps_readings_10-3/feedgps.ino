@@ -5,9 +5,9 @@
 bool feedgps()
 {
 	char ch;
-	while (nss.available())
+	while (GPS_SERIAL_PORT.available())
 	{
-		ch=nss.read();
+		ch=GPS_SERIAL_PORT.read();
 		//Serial.print(ch);
 		if (gps.encode(ch)){
 			//Serial.println("returns true");

@@ -1,5 +1,5 @@
 
-void printFloat(double number, int digits=2)
+void printFloat(double number, int digits)
 {
   // Handle negative numbers
   if (number < 0.0)

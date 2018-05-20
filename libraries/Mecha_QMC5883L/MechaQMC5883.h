@@ -42,9 +42,13 @@ void softReset(); //soft RESET
 
 void read(uint16_t* x,uint16_t* y,uint16_t* z); //reading
 void read(uint16_t* x,uint16_t* y,uint16_t* z,int* a);
+void read32(uint32_t* x,uint32_t* y,uint32_t* z);
+
 void read(uint16_t* x,uint16_t* y,uint16_t* z,float* a);
+void read32(uint32_t* x,uint32_t* y,uint32_t* z,float* a);
 
 float azimuth(uint16_t* a,uint16_t* b);
+float azimuth32(uint16_t* a,uint16_t* b);
 
 private:
 

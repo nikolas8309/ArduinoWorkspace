@@ -21,6 +21,9 @@
 #define ARDUINO_TO_DIRECTION_SERVO_PIN 9
 #define ARDUINO_TO_ESC_PIN 10
 
+
+#define GPS_SERIAL_PORT Serial1
+
 struct Point {
    float latitude;
    float longitude;

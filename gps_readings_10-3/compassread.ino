@@ -3,7 +3,7 @@
  */
 void compassread()
 {
-  int x, y, z;
+  uint16_t  x, y, z;
   int azimuth;
   //float azimuth; //is supporting float too
   qmc.read(&x, &y, &z,&azimuth);
@@ -26,7 +26,7 @@ void compassread()
  */
 int getAzimuth()
 {
-  int x, y, z;
+  uint16_t x, y, z;
   int azimuth;
   //float azimuth; //is supporting float too
   qmc.read(&x, &y, &z,&azimuth);
