@@ -23,7 +23,7 @@ void setDirection(DIRECTION dir){
 }
 
 void setControlHolder(CONTROLHOLDER newControlHolder){
-  if(newControlHolder==ARDUINO){
+  if(newControlHolder==MICROCONTROLLER){
     digitalWrite (TO_BUFFER_PIN, HIGH);
   }
   if(newControlHolder==RECEIVER){

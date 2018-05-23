@@ -20,6 +20,9 @@ Servo myservo;
 Servo esc;
 void setup()
 {
+  Serial.begin(115200);
+  Serial.println("START");
+
 	pinMode(setWaypointButtonPin , INPUT);
   pinMode (NANO_OUT_PIN , INPUT);
   pinMode (TO_BUFFER_PIN ,OUTPUT);
@@ -28,32 +31,38 @@ void setup()
   myservo.attach (ARDUINO_TO_DIRECTION_SERVO_PIN);
   esc.attach (ARDUINO_TO_ESC_PIN);
   
-	Serial.begin(115200);
+
 	//nss.begin(9600);
   GPS_SERIAL_PORT.begin(9600);
   
   //for receiver read 
 //   pinMode(RC_CH4_INPUT, INPUT);
 //   attachInterrupt(digitalPinToInterrupt(RC_CH4_INPUT), calc_input, CHANGE);
-   
-    qmc.init();
 
-	Wire.begin();
+  Wire.begin();
+   
+  qmc.init();
+
+
 
  //make sure receiver has the control
- //setControlHolder(RECEIVER);
+ setControlHolder(RECEIVER);
 }
+
 
 void loop()
 {
+
   static Point wayPoint;
   Point currentPoint;
+
+
   
   if (hasSignal()) {
     setControlHolder (RECEIVER);
 }
   else {
-    setControlHolder (ARDUINO);
+    setControlHolder (MICROCONTROLLER);
     setThrottle(100);
 
     //get current point 
