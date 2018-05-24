@@ -46,6 +46,7 @@ Point getGpsCurrentPosition (){
   gps.f_get_position(&currentPoint.latitude, &currentPoint.longitude);
 
   return currentPoint;
+  
 }
 
 //---------------------------------------------------------------

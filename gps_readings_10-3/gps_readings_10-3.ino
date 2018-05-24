@@ -1,30 +1,32 @@
 //#include <SoftwareSerial.h>
 #include <TinyGPS.h>
 #include <Wire.h>
-
-//#include "SparkFunIMU.h"
-//#include "SparkFunLSM303C.h"
-//#include "LSM303CTypes.h"
-
 #include "utilities.h"
+
+//------------azimuth for teensy staff
+union { 
+  int16_t i; 
+  uint16_t u;
+} Converter;
+
+//----------------
 
 void printFloat(double number, int digits=2);
 
 TinyGPS gps;
-//SoftwareSerial nss(6,7);//2,3
 MechaQMC5883 qmc;
 
-const int setWaypointButtonPin = 5;
+const int setWaypointButtonPin = 6;
 
 Servo myservo;
 Servo esc;
+
 void setup()
 {
   Serial.begin(115200);
   Serial.println("START");
 
 	pinMode(setWaypointButtonPin , INPUT);
-  pinMode (NANO_OUT_PIN , INPUT);
   pinMode (TO_BUFFER_PIN ,OUTPUT);
 
 //servo staff
@@ -32,12 +34,12 @@ void setup()
   esc.attach (ARDUINO_TO_ESC_PIN);
   
 
-	//nss.begin(9600);
+	
   GPS_SERIAL_PORT.begin(9600);
   
   //for receiver read 
-//   pinMode(RC_CH4_INPUT, INPUT);
-//   attachInterrupt(digitalPinToInterrupt(RC_CH4_INPUT), calc_input, CHANGE);
+   pinMode(RC_CH4_INPUT, INPUT);
+   attachInterrupt(digitalPinToInterrupt(RC_CH4_INPUT), calc_input, CHANGE);
 
   Wire.begin();
    
@@ -59,7 +61,7 @@ void loop()
 
   
   if (hasSignal()) {
-    setControlHolder (RECEIVER);
+    setControlHolder (RECEIVER); 
 }
   else {
     setControlHolder (MICROCONTROLLER);
@@ -69,18 +71,19 @@ void loop()
     currentPoint = getGpsCurrentPosition ();
 
     //  update waypoint if button was pressed
-    if(checkSetWaypointButton()){//to koumpi exei patithei
+      if(checkSetWaypointButton()){//to koumpi exei patithei
       //diavase tis sintetagmenes apo to gps kai valtes sto waypoint
       gps.f_get_position(&wayPoint.latitude, &wayPoint.longitude);
     }
-        
+       
     //get waypoint heading
     float heading=headingf(currentPoint,wayPoint);
     
     //get current heading
     int currentHeading = getAzimuth();
-    Serial.print(currentHeading);
-
+    Serial.print("current heading:");
+    Serial.println(currentHeading);
+ 
     //check if they are equal
 
     //set direction

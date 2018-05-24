@@ -6,9 +6,8 @@
 #include <MechaQMC5883.h>
 #include <Servo.h>
 
-#define RC_CH4_INPUT  3
+#define RC_CH4_INPUT  2
 
-#define NANO_OUT_PIN 11
 #define TO_BUFFER_PIN 12 
 
 #define SERVO_CENTER 90
