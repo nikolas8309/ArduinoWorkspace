@@ -24,3 +24,12 @@ float headingf(Point point1, Point point2)
   return heading;
 }
 
+
+int headingInt(Point point1, Point point2)
+{
+  float resultFloat=headingf(point1,point2);
+  int resultInt= (int) resultFloat;
+
+  return resultInt;
+}
+

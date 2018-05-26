@@ -20,6 +20,8 @@
 #define ARDUINO_TO_DIRECTION_SERVO_PIN 9
 #define ARDUINO_TO_ESC_PIN 10
 
+// se moires poso +- theoreitai oti einai idia i kateythinsi
+#define TZOGOS 10
 
 #define GPS_SERIAL_PORT Serial1
 
