@@ -2,6 +2,9 @@
 #define _UTILITIES_H_
 
 #include <Arduino.h>
+
+#include <TinyGPS.h>
+
 #include <Wire.h>
 #include <MechaQMC5883.h>
 #include <Servo.h>
@@ -17,7 +20,10 @@
 #define FULL_THROTTLE 100
 #define ZERO_THROTTLE 0
 
+// pou sindeetai to servo gia to pidalio
 #define ARDUINO_TO_DIRECTION_SERVO_PIN 9
+
+// pou sindeetai to speed controller
 #define ARDUINO_TO_ESC_PIN 10
 
 // se moires poso +- theoreitai oti einai idia i kateythinsi

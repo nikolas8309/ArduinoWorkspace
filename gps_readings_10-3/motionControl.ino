@@ -11,13 +11,13 @@ void setDirection(DIRECTION dir){
 
  switch (dir){
  case CENTER:
-  myservo.write(SERVO_CENTER);
+  pidalio.write(SERVO_CENTER);
   break;
  case LEFT:
-  myservo.write(SERVO_LEFT);
+  pidalio.write(SERVO_LEFT);
   break;
  case RIGHT:
-  myservo.write(SERVO_RIGHT);
+  pidalio.write(SERVO_RIGHT);
  break;
  }
 }

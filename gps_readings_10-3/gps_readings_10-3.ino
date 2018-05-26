@@ -1,5 +1,3 @@
-#include <TinyGPS.h>
-#include <Wire.h>
 #include "utilities.h"
 
 //------------azimuth for teensy staff
@@ -17,7 +15,7 @@ MechaQMC5883 qmc;
 
 const int setWaypointButtonPin = 6;
 
-Servo myservo;
+Servo pidalio;
 Servo esc;
 
 void setup()
@@ -29,7 +27,7 @@ void setup()
     pinMode (TO_BUFFER_PIN ,OUTPUT);
 
     //servo staff
-    myservo.attach (ARDUINO_TO_DIRECTION_SERVO_PIN);
+    pidalio.attach (ARDUINO_TO_DIRECTION_SERVO_PIN);
     esc.attach (ARDUINO_TO_ESC_PIN);
 
 
@@ -54,12 +52,7 @@ void setup()
 
 void loop()
 {
-    //TEST
-    Serial.print("expected 10 - result= ");Serial.println(foivos(40,50));
-    Serial.print("expected 10 - result= ");Serial.println(foivos(355,5));
-    Serial.print("expected 20 - result= ");Serial.println(foivos(10,350));
-    Serial.print("expected 179 - result= ");Serial.println(foivos(181,0));
-
+    
     static Point wayPoint;
     Point currentPoint;
 
@@ -101,15 +94,26 @@ void loop()
        
         
         //check if they are equal
-        if( lookSameDirection( desiredHeading, currentHeading)){
-              Serial.println ("koitane stin idia");
+        DIRECTION dir=lookSameDirection( desiredHeading, currentHeading);
+
+        switch(dir){
+          
+         case CENTER:
+          Serial.println ("isia");
+          break;
+         case LEFT:
+          Serial.println ("ARISTERA");
+          break;
+         case RIGHT:
+          Serial.println ("DEKsia");
+         break;
         }
-        else 
-              Serial.println ("den koitane stin idia");
+
+        
         //set direction
         //    setDirection();
 
-        delay(2000);
+        delay(2500);
     }
     
 }//end loop
