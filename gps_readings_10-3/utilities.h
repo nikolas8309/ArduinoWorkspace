@@ -11,13 +11,13 @@
 
 #define RC_CH4_INPUT  2
 
-#define TO_BUFFER_PIN 12 
+#define TO_BUFFER_PIN 11 
 
-#define SERVO_CENTER 90
-#define SERVO_RIGHT 170
-#define SERVO_LEFT 10
+#define SERVO_CENTER 110
+#define SERVO_RIGHT 10
+#define SERVO_LEFT 170
 
-#define FULL_THROTTLE 100
+#define FULL_THROTTLE 50
 #define ZERO_THROTTLE 0
 
 // pou sindeetai to servo gia to pidalio

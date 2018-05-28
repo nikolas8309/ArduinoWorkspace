@@ -93,27 +93,14 @@ void loop()
 
        
         
-        //check if they are equal
+        //--------------------------------------------------------------------check if they are equal
         DIRECTION dir=lookSameDirection( desiredHeading, currentHeading);
-
-        switch(dir){
-          
-         case CENTER:
-          Serial.println ("isia");
-          break;
-         case LEFT:
-          Serial.println ("ARISTERA");
-          break;
-         case RIGHT:
-          Serial.println ("DEKsia");
-         break;
-        }
-
         
-        //set direction
-        //    setDirection();
 
-        delay(2500);
+         //----------------------------------------------------------------------set direction
+            setDirection(dir);
+
+        delay(250);
     }
     
 }//end loop

@@ -24,10 +24,10 @@ void setDirection(DIRECTION dir){
 
 void setControlHolder(CONTROLHOLDER newControlHolder){
   if(newControlHolder==MICROCONTROLLER){
-    digitalWrite (TO_BUFFER_PIN, HIGH);
+    digitalWrite (TO_BUFFER_PIN, LOW);
   }
   if(newControlHolder==RECEIVER){
-    digitalWrite (TO_BUFFER_PIN, LOW);
+    digitalWrite (TO_BUFFER_PIN, HIGH);
   }
 }
 
