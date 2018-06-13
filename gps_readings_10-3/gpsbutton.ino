@@ -50,7 +50,16 @@ Point getGpsCurrentPosition (){
 }
 
 //---------------------------------------------------------------
+  //vlepei ama h apostash einai kato apo 20 metra kai anavei to led
 
+//  bool  wayPointCoordinatesAreSet(){
+//    
+//        if (dist<20){
+//    return true;
+//    }
+//    else return false;
+//    
+//  }
 
 
 

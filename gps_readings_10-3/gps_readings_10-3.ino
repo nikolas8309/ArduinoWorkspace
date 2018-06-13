@@ -25,7 +25,7 @@ void setup()
 
     pinMode(setWaypointButtonPin , INPUT);
     pinMode (TO_BUFFER_PIN ,OUTPUT);
-
+    pinMode (GPS_CURRENT_POTITION_LED_PIN , OUTPUT);
     //servo staff
     pidalio.attach (ARDUINO_TO_DIRECTION_SERVO_PIN);
     esc.attach (ARDUINO_TO_ESC_PIN);
@@ -86,12 +86,22 @@ void loop()
         
 
         //-------------------------------get distance between current point and waypoint for debugging
-//        float dist=distance(currentPoint,wayPoint);
-//        Serial.print("distance: ");
-//        Serial.print(dist,4);    //print the distance in meters
-//        Serial.println(" m");
+        float dist=distance(currentPoint,wayPoint);
+        Serial.print("distance: ");
+        Serial.print(dist,4);    //print the distance in meters
+        Serial.println(" m");
 
-       
+       //vlepei ama h apostash einai kato apo 20 metra kai anavei to led
+
+              
+                    if (dist<20){
+                digitalWrite (GPS_CURRENT_POTITION_LED_PIN,HIGH);
+                }
+                else {
+                  digitalWrite (GPS_CURRENT_POTITION_LED_PIN,LOW);
+                }
+                
+             
         
         //--------------------------------------------------------------------check if they are equal
         DIRECTION dir=lookSameDirection( desiredHeading, currentHeading);
