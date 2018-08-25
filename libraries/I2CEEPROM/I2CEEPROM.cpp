@@ -46,7 +46,7 @@ byte I2CEEPROM::read(unsigned int address) const
   byte read_data = 0xFF;
 
   Wire.beginTransmission(_i2c_device_address);
-  Wire.write((int)(address >> 8));   // MSB
+  Wire.write((int)(address) >> 8);   // MSB
   Wire.write((int)(address & 0xFF)); // LSB
   Wire.endTransmission();
 
