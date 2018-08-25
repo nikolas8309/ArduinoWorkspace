@@ -5,13 +5,12 @@
 uint16_t rc_values;
 uint32_t rc_start;
 volatile uint16_t rc_shared;
-int minLimit = 900;
+int minLimit = 1350;
 int maxLimit = 1450;
 
 void rc_read_values() {
     noInterrupts();
     rc_values=rc_shared;
-    //Serial.print (rc_values);
     interrupts();
 }
 
@@ -32,6 +31,7 @@ bool hasSignal(){
         delay(100);
         rc_read_values();
         if(rc_values != constrain(rc_values, minLimit,maxLimit )){
+          //Serial.println (rc_values);
             isInLimit=false;
             break;
         }

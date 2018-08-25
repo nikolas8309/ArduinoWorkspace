@@ -22,6 +22,8 @@ void setup()
 {
     Serial.begin(115200);
     Serial.println("START");
+    delay(2500);
+    Serial.println("START2");
 
     pinMode(setWaypointButtonPin , INPUT);
     pinMode (TO_BUFFER_PIN ,OUTPUT);
@@ -58,60 +60,59 @@ void loop()
 
     if (hasSignal()) {
         setControlHolder (RECEIVER); 
+        Serial.println ("control = receiver");
     }
     else {
         setControlHolder (MICROCONTROLLER);
-        setThrottle(100);
-
-        //---------------------------------------------------get current point 
-        currentPoint = getGpsCurrentPosition ();
-
-        // ------------------------------------------------------------ update waypoint if button was pressed
-        if(checkSetWaypointButton()){//to koumpi exei patithei
-            //diavase tis sintetagmenes apo to gps kai valtes sto waypoint
-            gps.f_get_position(&wayPoint.latitude, &wayPoint.longitude);
-        }
-        gpsdump(gps);  
-        //-------------------------------------------------get waypoint heading (desired heading)
-        int desiredHeading=headingInt(currentPoint,wayPoint);
-        Serial.print("desired heading: ");
-        Serial.print(desiredHeading);   // print the heading.
-        Serial.println(" degrees");
-        
-        //----------------------------------------------------get current heading
-        int currentHeading = getAzimuth();
-        Serial.print("current heading:");
-        Serial.println(currentHeading);
-
-        
-
-        //-------------------------------get distance between current point and waypoint for debugging
-        float dist=distance(currentPoint,wayPoint);
-        Serial.print("distance: ");
-        Serial.print(dist,4);    //print the distance in meters
-        Serial.println(" m");
-
-       //vlepei ama h apostash einai kato apo 20 metra kai anavei to led
-
-              
-                    if (dist<20){
-                digitalWrite (GPS_CURRENT_POTITION_LED_PIN,HIGH);
-                }
-                else {
-                  digitalWrite (GPS_CURRENT_POTITION_LED_PIN,LOW);
-                }
-                
-             
-        
-        //--------------------------------------------------------------------check if they are equal
-        DIRECTION dir=lookSameDirection( desiredHeading, currentHeading);
-        
-
-         //----------------------------------------------------------------------set direction
-            setDirection(dir);
-
-        delay(250);
+        Serial.println ("control = microcontroller");
     }
+    setThrottle(100);
+
+    //---------------------------------------------------get current point 
+    currentPoint = getGpsCurrentPosition ();
+
+    // ------------------------------------------------------------ update waypoint if button was pressed
+    if(checkSetWaypointButton()){//to koumpi exei patithei
+        //diavase tis sintetagmenes apo to gps kai valtes sto waypoint
+        gps.f_get_position(&wayPoint.latitude, &wayPoint.longitude);
+    }
+    gpsdump(gps);  
+    //-------------------------------------------------get waypoint heading (desired heading)
+    int desiredHeading=headingInt(currentPoint,wayPoint);
+    Serial.print("desired heading: ");
+    Serial.print(desiredHeading);   // print the heading.
+    Serial.println(" degrees");
+    
+    //----------------------------------------------------get current heading
+    int currentHeading = getAzimuth();
+    Serial.print("current heading:");
+    Serial.println(currentHeading);
+
+    //-------------------------------get distance between current point and waypoint for debugging
+    float dist=distance(currentPoint,wayPoint);
+    Serial.print("distance: ");
+    Serial.print(dist,4);    //print the distance in meters
+    Serial.println(" m");
+
+    //vlepei ama h apostash einai kato apo 20 metra kai anavei to led
+    if (dist<20){
+        digitalWrite (GPS_CURRENT_POTITION_LED_PIN,HIGH);
+    }
+    else {
+        digitalWrite (GPS_CURRENT_POTITION_LED_PIN,LOW);
+    }
+    
+    
+    
+    //--------------------------------------------------------------------check if they are equal
+    DIRECTION dir=lookSameDirection( desiredHeading, currentHeading);
+    
+
+    //----------------------------------------------------------------------set direction
+    setDirection(dir);
+
+    delay(250);
+
     
 }//end loop
 

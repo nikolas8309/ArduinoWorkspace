@@ -12,12 +12,15 @@ void setDirection(DIRECTION dir){
  switch (dir){
  case CENTER:
   pidalio.write(SERVO_CENTER);
+  Serial.println("isia");
   break;
  case LEFT:
   pidalio.write(SERVO_LEFT);
+  Serial.println("aristera");
   break;
  case RIGHT:
   pidalio.write(SERVO_RIGHT);
+  Serial.println("deksia");
  break;
  }
 }

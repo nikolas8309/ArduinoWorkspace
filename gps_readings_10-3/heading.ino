@@ -10,6 +10,9 @@ float headingf(Point point1, Point point2)
   float flon1=point1.longitude;
   float x2lat=point2.latitude;
   float x2lon=point2.longitude;
+
+  //
+  
   
 	flon1 = radians(flon1);  //also must be done in radians
 	x2lon = radians(x2lon);  //radians duh.
